@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Photo</title>
+</head>
+<body style="background-color: #f4f4f9; color: #333; display: flex; flex-direction: column; align-items: center; padding: 40px; font-family: Arial, sans-serif;">
+
+<h2 class="form-title" style="font-size: 2em; margin-bottom: 20px; color: #007bff;">Upload Photo</h2>
+
+<form method="POST" enctype="multipart/form-data" class="upload-form" style="background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); width: 100%; max-width: 500px;">
+    {% csrf_token %}
+    <div style="margin-bottom: 15px;">
+        {{ form.as_p }}
+    </div>
+    <div class="form-buttons" style="display: flex; justify-content: space-between; gap: 15px;">
+        <button type="submit" class="btn submit-btn" style="padding: 10px 20px; background-color: #28a745; color: #fff; font-size: 1em; border: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28a745'">Upload</button>
+        <a href="{% url 'home' %}" class="btn cancel-btn" style="padding: 10px 20px; background-color: #dc3545; color: #fff; font-size: 1em; text-decoration: none; border-radius: 5px; cursor: pointer; transition: background-color 0.3s; display: inline-block;" onmouseover="this.style.backgroundColor='#c82333'" onmouseout="this.style.backgroundColor='#dc3545'">Back to Photos</a>
+    </div>
+</form>
+
+</body>
+</html>
+

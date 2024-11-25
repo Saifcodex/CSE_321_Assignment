@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Gallery</title>
+</head>
+<body style="background-color: #f4f4f9; color: #333; display: flex; flex-direction: column; align-items: center; padding: 20px; font-family: Arial, sans-serif;">
+
+<h1>Animal Gallery</h1>
+<h2>Explore the Photos</h2>
+
+<ul style="display: flex; flex-wrap: wrap; list-style-type: none; gap: 20px; padding: 0; max-width: 5200px; justify-content: center;">
+
+    {% for photo in photos %}
+    <li style="width: 250px; text-align: center; margin-bottom: 20px;">
+        <div style="background-color: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); transition: transform 0.2s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+            <img src="{{ photo.image.url }}" alt="{{ photo.species }}" style="width: 100%; height: auto; border-bottom: 1px solid #ddd;">
+            <div style="padding: 15px;">
+                <h2 style="font-size: 1.2em; margin-bottom: 10px;">{{ photo.species }}</h2>
+                <div style="display: flex; flex-direction: column; gap: 10px; text-align: left; font-size: 0.9em; color: #777;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong>Habitat:</strong> {{ photo.habitat }}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong>Diet:</strong> {{ photo.diet }}
+                    </div>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <strong>Average Lifespan:</strong> {{ photo.avg_lifespan }} years
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                <button onclick="window.location.href='{% url 'update_photo' photo.id %}'" style="padding: 10px 15px; font-size: 0.9em; border-radius: 5px; background-color: #007bff; color: #fff; cursor: pointer; border: none; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#0056b3'" onmouseout="this.style.backgroundColor='#007bff'">Update Photo</button>
+                <button onclick="window.location.href='{% url 'delete_photo' photo.id %}'" style="padding: 10px 15px; font-size: 0.9em; border-radius: 5px; background-color: #dc3545; color: #fff; cursor: pointer; border: none; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#c82333'" onmouseout="this.style.backgroundColor='#dc3545'">Delete Photo</button>
+            </div>
+        </div>
+    </li>
+    {% empty %}
+    <p>No photos available at the moment.</p>
+    {% endfor %}
+</ul>
+
+<div style="margin-top: 30px;">
+    <button onclick="window.location.href='{% url 'photo_upload' %}'" style="padding: 10px 20px; background-color: #28a745; color: #fff; text-decoration: none; border-radius: 5px; font-size: 1em; cursor: pointer; border: none; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#218838'" onmouseout="this.style.backgroundColor='#28a745'">Upload New Photo</button>
+</div>
+
+</body>
+</html>
